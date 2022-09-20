@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .ball-container {
+        display: flex;
+        justify-content: center;
+      }
+      .ball {
+        width: 10rem;
+        height: 10rem;
+        text-align: center;
+        line-height: 10rem;
+        border-radius: 50%;
+        margin: 0.5rem;
+        font-size: 25px;
+        font-weight: 600;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .ball-color0x {
+        background-color: rgb(255, 179, 81);
+      }
+      .ball-color1x {
+        background-color: deepskyblue;
+      }
+      .ball-color2x {
+        background-color: rgb(248, 63, 63);
+      }
+      .ball-color3x {
+        background-color: gray;
+      }
+      .ball-color4x {
+        background-color: greenyellow;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="result">
+      <h1 class="text-center">로또 추첨번호</h1>
+      <button>추천 번호</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script>
+      const button = document.querySelector("button");
+      button.addEventListener("click", function () {
+        // 테두리 만들기
+        const ballContainer = document.createElement("div");
+        ballContainer.classList.add("ball-container");
+        // 추첨 번호 만들기
+        const randomNum = _.sampleSize(_.range(1, 46), 6);
+        console.log(randomNum);
+        for (num of randomNum) {
+          console.log(num);
+          const ball = document.createElement("div");
+          ball.classList.add("ball");
+          ball.innerText = num;
+          if (num > 40) {
+            ball.classList.add("ball-color4x");
+          } else if (num > 30) {
+            ball.classList.add("ball-color3x");
+          } else if (num > 20) {
+            ball.classList.add("ball-color2x");
+          } else if (num > 10) {
+            ball.classList.add("ball-color1x");
+          } else {
+            ball.classList.add("ball-color0x");
+          }
+          ballContainer.appendChild(ball);
+        }
+        // 테두리에 번호 붙이기
+        const result = document.querySelector("#result");
+        result.appendChild(ballContainer);
+      });
+    </script>
+  </body>
+</html>
